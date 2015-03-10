@@ -12,17 +12,19 @@ import Foundation
 
 
 
-    var request = NSMutableURLRequest(URL: NSURL(string: "https://rest.sqor.com/feeds/trending")!)
+    var request = NSMutableURLRequest(URL: NSURL(string: "https://rest-dev.sqor.com/posts")!)
     var session = NSURLSession.sharedSession()
     request.HTTPMethod = "POST"
     
-    var params = ["username":"jameson", "password":"password"] as Dictionary<String, String>
+    var params = ["content":"yoooooo"] as Dictionary<String, String>
     
     var err: NSError?
     request.HTTPBody = NSJSONSerialization.dataWithJSONObject(params, options: nil, error: &err)
     request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-    request.addValue("application/json", forHTTPHeaderField: "Accept")
-    
+  //  request.addValue("application/json", forHTTPHeaderField: "Accept")
+request.addValue("YOUR TOKEN HERE", forHTTPHeaderField: "access-token")
+request.addValue("6", forHTTPHeaderField: "sqor-api-version")
+
     var task = session.dataTaskWithRequest(request, completionHandler: {data, response, error -> Void in
         println("Response: \(response)")
         var strData = NSString(data: data, encoding: NSUTF8StringEncoding)
